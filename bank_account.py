@@ -12,7 +12,7 @@ class BankAccount:
 
     def withdraw(self, amount):
         # BUG: Does not check for negative amounts!
-        if amount > self.__balance:
+        if amount > self.__balance or amount < 0:
             raise ValueError("Insufficient funds!")
         self.__balance -= amount
 
