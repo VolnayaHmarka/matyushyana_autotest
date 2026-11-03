@@ -43,4 +43,11 @@ class TestEcommerce:
 
         expect(page.locator("[data-test='product-name']")).to_have_text(first_card_name)
 
-        
+        #add to card
+        page.get_by_role("button", name="Add to cart").click()
+                
+        toast = page.get_by_role("alert")
+        expect(toast).to_be_visible()
+        expect(toast).to_have_text(SUCCESS_MSG_ADD_TO_CART)
+                
+        expect(page.get_by_role("link", name="cart")).to_be_visible()
