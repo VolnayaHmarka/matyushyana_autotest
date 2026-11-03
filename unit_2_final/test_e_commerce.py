@@ -5,6 +5,7 @@ from configs.settings import TEST_APP_URL
 
 SORT_DROPDOWN_VALUE = "price,asc"
 CURRENCY_SYMBOL = "$"
+SUCCESS_MSG_ADD_TO_CART = "Product added to shopping cart."
 
 @pytest.mark.e_commerce
 class TestEcommerce:
@@ -33,3 +34,13 @@ class TestEcommerce:
         prices = [parse_price(price) for price in prices_text]
         
         assert prices == sorted(prices), f"Expected: prices are sorted form Low to High: {sorted(prices)}, Actual: {prices}"
+
+        #check that the 1st card page opens
+        first_card = page.locator(".card").first
+        first_card_name = first_card.get_by_role("heading").inner_text()
+
+        first_card.click()
+
+        expect(page.locator("[data-test='product-name']")).to_have_text(first_card_name)
+
+        
