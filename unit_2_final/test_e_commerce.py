@@ -51,3 +51,16 @@ class TestEcommerce:
         expect(toast).to_have_text(SUCCESS_MSG_ADD_TO_CART)
                 
         expect(page.get_by_role("link", name="cart")).to_be_visible()
+
+        page.get_by_role("link", name="cart").click()
+        
+        table = page.get_by_role("table")
+        expect(table).to_be_visible
+        
+        items = page.locator("[data-test='product-title']")
+
+        expect(items.filter(has_text=first_card_name)).to_be_visible()
+
+
+
+
